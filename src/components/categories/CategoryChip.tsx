@@ -3,7 +3,7 @@ interface SelectedCategoryProps {
   onRemove: () => void;
 }
 
-export default function SelectedCategory({
+export default function CategoryChip({
   title,
   onRemove,
 }: SelectedCategoryProps) {

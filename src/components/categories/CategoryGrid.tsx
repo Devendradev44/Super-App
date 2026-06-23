@@ -1,13 +1,8 @@
 import CategoryCard from "./CategoryCard";
-
-interface Category {
-  title: string;
-  image: string;
-  color: string;
-}
+import type { Category } from "@/constants/categories";
 
 interface CategoryGridProps {
-  categories: Category[];
+  categories: readonly Category[];
   selectedCategories: string[];
   toggleCategory: (category: string) => void;
 }
@@ -18,7 +13,7 @@ export default function CategoryGrid({
   toggleCategory,
 }: CategoryGridProps) {
   return (
-    <div className="grid grid-cols-3 gap-6">
+    <div className="grid grid-cols-2 gap-5 lg:grid-cols-3">
       {categories.map((category) => (
         <CategoryCard
           key={category.title}
