@@ -26,7 +26,7 @@ export default function WeatherWidget() {
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-semibold">Weather</h2>
 
-        <span className="text-sm opacity-70">
+        <span suppressHydrationWarning className="text-sm opacity-70">
           {new Date().toLocaleDateString()}
         </span>
       </div>

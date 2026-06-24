@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import UserCard from "@/components/dashboard/UserCard";
 import WeatherWidget from "@/components/dashboard/WeatherWidget";
 import NotesWidget from "@/components/dashboard/NotesWidget";
@@ -26,8 +28,20 @@ export default function DashboardPage() {
 
         </div>
 
-        <div className="mt-6">
+        <div className="mt-3">
+          <div className="w-full lg:w-2/3">
           <TimerWidget />
+
+            </div>
+        </div>
+
+        <div className="mt-6 flex justify-end">
+          <Link
+            href="/movies"
+            className="rounded-full bg-green-500 px-8 py-2 text-sm font-semibold text-black transition hover:bg-green-400"
+          >
+            Browse
+          </Link>
         </div>
 
       </div>

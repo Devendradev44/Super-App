@@ -10,19 +10,18 @@ export default function TimerWidget() {
     if (!timer.isRunning) return;
 
     const interval = setInterval(() => {
-      if (
-        timer.hours === 0 &&
-        timer.minutes === 0 &&
-        timer.seconds === 0
-      ) {
-        setTimer({
-          ...timer,
+      let { hours, minutes, seconds } = useStore.getState().timer;
+
+      if (hours === 0 && minutes === 0 && seconds === 0) {
+        useStore.getState().setTimer({
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
           isRunning: false,
         });
+
         return;
       }
-
-      let { hours, minutes, seconds } = timer;
 
       if (seconds > 0) {
         seconds--;
@@ -35,7 +34,7 @@ export default function TimerWidget() {
         seconds = 59;
       }
 
-      setTimer({
+      useStore.getState().setTimer({
         hours,
         minutes,
         seconds,
@@ -44,24 +43,42 @@ export default function TimerWidget() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timer, setTimer]);
+  }, [timer.isRunning]);
 
   const increaseHours = () =>
     setTimer({
       ...timer,
-      hours: timer.hours + 1,
+      hours: Math.min(timer.hours + 1, 23),
     });
 
   const increaseMinutes = () =>
     setTimer({
       ...timer,
-      minutes: timer.minutes + 1,
+      minutes: (timer.minutes + 1) % 60,
     });
 
   const increaseSeconds = () =>
     setTimer({
       ...timer,
-      seconds: timer.seconds + 1,
+      seconds: (timer.seconds + 1) % 60,
+    });
+
+  const decreaseHours = () =>
+    setTimer({
+      ...timer,
+      hours: Math.max(timer.hours - 1, 0),
+    });
+
+  const decreaseMinutes = () =>
+    setTimer({
+      ...timer,
+      minutes: Math.max(timer.minutes - 1, 0),
+    });
+
+  const decreaseSeconds = () =>
+    setTimer({
+      ...timer,
+      seconds: Math.max(timer.seconds - 1, 0),
     });
 
   const startPause = () =>
@@ -70,87 +87,127 @@ export default function TimerWidget() {
       isRunning: !timer.isRunning,
     });
 
-  const reset = () =>
-    setTimer({
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-      isRunning: false,
-    });
-
   return (
-    <div className="rounded-[28px] bg-[#1F1F1F] p-8 text-white shadow-lg">
+        <div className="mx-auto max-w-4xl rounded-[28px] bg-[#1C2340] p-4 text-white shadow-lg">
 
-      <h2 className="mb-8 text-3xl font-bold">
-        Timer
-      </h2>
+      <div className="flex flex-col items-center gap-5 lg:flex-row lg:justify-between">
 
-      <div className="mb-8 grid grid-cols-3 gap-6 text-center">
+        {/* Circle */}
 
-        <div>
-          <p className="mb-2 text-sm text-neutral-400">Hours</p>
+        <div className="flex h-36 w-36 items-center justify-center rounded-full border-[6px] border-[#FF6B6B]">
 
-          <p className="text-5xl font-bold">
-            {String(timer.hours).padStart(2, "0")}
-          </p>
+          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[#1C2340] text-2xl font-semibold">
 
-          <button
-            onClick={increaseHours}
-            className="mt-4 rounded-lg bg-neutral-700 px-4 py-2 hover:bg-neutral-600"
-          >
-            +
-          </button>
-        </div>
-
-        <div>
-          <p className="mb-2 text-sm text-neutral-400">Minutes</p>
-
-          <p className="text-5xl font-bold">
-            {String(timer.minutes).padStart(2, "0")}
-          </p>
-
-          <button
-            onClick={increaseMinutes}
-            className="mt-4 rounded-lg bg-neutral-700 px-4 py-2 hover:bg-neutral-600"
-          >
-            +
-          </button>
-        </div>
-
-        <div>
-          <p className="mb-2 text-sm text-neutral-400">Seconds</p>
-
-          <p className="text-5xl font-bold">
+            {String(timer.hours).padStart(2, "0")}:
+            {String(timer.minutes).padStart(2, "0")}:
             {String(timer.seconds).padStart(2, "0")}
-          </p>
 
-          <button
-            onClick={increaseSeconds}
-            className="mt-4 rounded-lg bg-neutral-700 px-4 py-2 hover:bg-neutral-600"
-          >
-            +
-          </button>
+          </div>
+
+        </div>
+
+        {/* Controls */}
+
+        <div className="flex flex-1 items-center justify-evenly">
+
+          {/* Hours */}
+
+          <div className="text-center">
+
+            <p className="mb-1 text-xs text-neutral-400">
+              Hours
+            </p>
+
+            <button
+              onClick={increaseHours}
+              className="text-lg hover:text-[#FF6B6B]"
+            >
+              ▲
+            </button>
+
+            <p className="my-2 text-5xl font-light">
+              {String(timer.hours).padStart(2, "0")}
+            </p>
+
+            <button
+              onClick={decreaseHours}
+              className="text-lg hover:text-[#FF6B6B]"
+            >
+              ▼
+            </button>
+
+          </div>
+
+          <div className="pb-4 text-4xl">:</div>
+
+          {/* Minutes */}
+
+          <div className="text-center">
+
+            <p className="mb-1 text-xs text-neutral-400">
+              Minutes
+            </p>
+
+            <button
+              onClick={increaseMinutes}
+              className="text-lg hover:text-[#FF6B6B]"
+            >
+              ▲
+            </button>
+
+            <p className="my-2 text-5xl font-light">
+              {String(timer.minutes).padStart(2, "0")}
+            </p>
+
+            <button
+              onClick={decreaseMinutes}
+              className="text-lg hover:text-[#FF6B6B]"
+            >
+              ▼
+            </button>
+
+          </div>
+
+          <div className="pb-4 text-4xl">:</div>
+
+          {/* Seconds */}
+
+          <div className="text-center">
+
+            <p className="mb-1 text-xs text-neutral-400">
+              Seconds
+            </p>
+
+            <button
+              onClick={increaseSeconds}
+              className="text-lg hover:text-[#FF6B6B]"
+            >
+              ▲
+            </button>
+
+            <p className="my-2 text-5xl font-light">
+              {String(timer.seconds).padStart(2, "0")}
+            </p>
+
+            <button
+              onClick={decreaseSeconds}
+              className="text-lg hover:text-[#FF6B6B]"
+            >
+              ▼
+            </button>
+
+          </div>
+
         </div>
 
       </div>
 
-      <div className="flex gap-4">
-
-        <button
-          onClick={startPause}
-          className="flex-1 rounded-xl bg-[#148A08] py-3 font-semibold transition hover:opacity-90"
-        >
-          {timer.isRunning ? "Pause" : "Start"}
-        </button>
-
-        <button
-          onClick={reset}
-          className="flex-1 rounded-xl bg-red-600 py-3 font-semibold transition hover:bg-red-500"
-        >
-          Reset
-        </button>
-
-      </div>
+      <button
+        onClick={startPause}
+        className="mt-5 w-full rounded-full bg-[#FF6B6B] py-2 text-lg font-semibold transition hover:opacity-90"
+      >
+        {timer.isRunning ? "Pause" : "Start"}
+      </button>
 
     </div>
   );
