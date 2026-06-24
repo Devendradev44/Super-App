@@ -7,6 +7,7 @@ import { getMovies, getMovieDetails } from "@/services/movies";
 
 import MovieCard from "@/components/movies/MovieCard";
 import MovieModal from "@/components/movies/MovieModal";
+import Image from "next/image";
 
 import type { Movie, MovieDetails } from "@/types/movie";
 
@@ -65,13 +66,27 @@ export default function MoviesPage() {
 
       <div className="mx-auto max-w-7xl">
 
-        <h1 className="mb-2 text-6xl font-bold text-green-500">
-          Super App
-        </h1>
+        <div className="mb-10 flex items-center justify-between">
 
-        <p className="mb-10 text-2xl">
-          Entertainment according to your choice
-        </p>
+  <div>
+    <h1 className="text-5xl font-bold text-green-500">
+      Super App
+    </h1>
+
+    <p className="mt-2 text-xl text-white">
+      Entertainment according to your choice
+    </p>
+  </div>
+
+  <Image
+    src="/images/avatar.webp"
+    alt="User Avatar"
+    width={70}
+    height={70}
+    className="rounded-full object-cover"
+  />
+
+</div>
               {selectedCategories.map((category) => (
         <section
           key={category}
