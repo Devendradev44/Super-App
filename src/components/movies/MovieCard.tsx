@@ -21,6 +21,8 @@ export default function MovieCard({
       <Image
         src={poster}
         alt={title}
+        width={300}
+        height={450}
         className="h-72 w-full object-cover"
       />
 
