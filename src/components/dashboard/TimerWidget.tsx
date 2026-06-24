@@ -88,7 +88,7 @@ export default function TimerWidget() {
     });
 
   return (
-        <div className="mx-auto max-w-4xl rounded-[28px] bg-[#1C2340] p-4 text-white shadow-lg">
+        <div className="w-full rounded-[28px] bg-[#1C2340] p-4 text-white shadow-lg">
 
       <div className="flex flex-col items-center gap-5 lg:flex-row lg:justify-between">
 

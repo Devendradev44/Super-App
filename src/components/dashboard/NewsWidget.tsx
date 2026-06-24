@@ -27,7 +27,7 @@ export default function NewsWidget() {
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % articles.length);
-    }, 2000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [articles]);
@@ -42,27 +42,44 @@ export default function NewsWidget() {
     );
   }
 
-  return (
-    <div className="overflow-hidden rounded-[28px] bg-[#1F1F1F] text-white shadow-lg">
-      {article.urlToImage && (
-        <Image
-          src={article.urlToImage}
-          alt={article.title}
-          className="h-[180px] w-full object-cover"
-          width={500}
-          height={180}
-        />
-      )}
+    return (
+  <div className="h-[465px] overflow-hidden rounded-[28px] bg-[#F5F5F5] shadow-lg">
 
-      <div className="p-5">
-        <h2 className="line-clamp-2 text-xl font-bold">
+    <div className="relative h-[240px]">
+
+      <Image
+        src={article.urlToImage}
+        alt={article.title}
+        fill
+        className="object-cover"
+      />
+
+      <div className="absolute inset-x-0 bottom-0 bg-black/60 p-4">
+
+        <h2 className="line-clamp-2 text-2xl font-semibold text-white">
           {article.title}
         </h2>
 
-        <p className="mt-3 line-clamp-4 text-sm text-neutral-300">
-          {article.description}
+        <p className="mt-2 text-sm text-neutral-200">
+          {new Date(article.publishedAt).toLocaleDateString()}{" "}
+          {new Date(article.publishedAt).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </p>
+
       </div>
+
     </div>
-  );
+
+    <div className="p-6 flex flex-col h-[225px]">
+
+      <p className="line-clamp-[8] text-base leading-7 text-[#444]">
+        {article.description}
+      </p>
+
+    </div>
+
+  </div>
+);
 }

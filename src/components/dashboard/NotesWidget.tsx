@@ -11,8 +11,9 @@ export default function NotesWidget() {
   };
 
   return (
-    <div className="h-[320px] rounded-[28px] bg-[#F1C75B] p-8 shadow-lg">
-      <h2 className="mb-5 text-4xl font-bold text-black">
+    <div className="flex h-[465px] flex-col rounded-[28px] bg-[#F1C75B] p-8 shadow-lg">
+
+      <h2 className="mb-4 text-3xl font-bold text-black">
         All notes
       </h2>
 
@@ -21,22 +22,24 @@ export default function NotesWidget() {
         onChange={handleChange}
         placeholder="Write your notes..."
         className="
-          h-[220px]
+          mt-6
+          flex-1
           w-full
           resize-none
           overflow-y-auto
           bg-transparent
           text-lg
-          leading-8
+          leading-9
           text-black
           outline-none
           placeholder:text-neutral-700
         "
       />
 
-      <div className="mt-3 text-right text-sm text-neutral-700">
+      <div className="mt-auto pt-3 text-right text-xs text-neutral-700">
         {notes.length} characters
       </div>
+
     </div>
   );
 }

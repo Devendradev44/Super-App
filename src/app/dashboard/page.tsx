@@ -8,12 +8,13 @@ import TimerWidget from "@/components/dashboard/TimerWidget";
 
 export default function DashboardPage() {
   return (
-    <main className="min-h-screen bg-black p-6">
-      <div className="mx-auto max-w-7xl">
+    <main className="min-h-screen overflow-y-auto bg-black p-4">
 
-        <div className="grid gap-6 lg:grid-cols-3">
+      <div className="mx-auto flex max-w-7xl flex-col">
 
-          <div className="space-y-6">
+        <div className="grid gap-4 lg:grid-cols-[1.15fr_1.15fr_1.1fr]">
+
+          <div className="space-y-4">
             <UserCard />
             <WeatherWidget />
           </div>
@@ -28,23 +29,23 @@ export default function DashboardPage() {
 
         </div>
 
-        <div className="mt-3">
-          <div className="w-full lg:w-2/3">
-          <TimerWidget />
+        <div className="mt-4 flex items-end justify-between gap-4">
 
-            </div>
-        </div>
+          <div className="w-full lg:w-[72%]">
+            <TimerWidget />
+          </div>
 
-        <div className="mt-6 flex justify-end">
           <Link
             href="/movies"
-            className="rounded-full bg-green-500 px-8 py-2 text-sm font-semibold text-black transition hover:bg-green-400"
+            className="rounded-full bg-green-500 px-8 py-3 text-sm font-semibold text-black transition hover:bg-green-400"
           >
             Browse
           </Link>
+
         </div>
 
       </div>
+
     </main>
   );
 }
