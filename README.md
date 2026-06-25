@@ -6,9 +6,9 @@ A modern entertainment dashboard built with **Next.js**, **TypeScript**, **Tailw
 
 ## 🚀 Live Demo
 
-**Live URL:** *Add your Vercel deployment link here*
+**Live URL:** *https://super-app-teal-eight.vercel.app/*
 
-**GitHub Repository:** *Add your GitHub repository link here*
+**GitHub Repository:** *https://github.com/Devendradev44/Super-App*
 
 ---
 
