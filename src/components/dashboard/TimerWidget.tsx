@@ -87,6 +87,15 @@ export default function TimerWidget() {
       isRunning: !timer.isRunning,
     });
 
+
+    const reset = () =>
+      setTimer({
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        isRunning: false,
+      });
+
   return (
         <div className="w-full rounded-[28px] bg-[#1C2340] p-4 text-white shadow-lg">
 
@@ -202,12 +211,24 @@ export default function TimerWidget() {
 
       </div>
 
-      <button
-        onClick={startPause}
-        className="mt-5 w-full rounded-full bg-[#FF6B6B] py-2 text-lg font-semibold transition hover:opacity-90"
-      >
-        {timer.isRunning ? "Pause" : "Start"}
-      </button>
+        <div className="mt-5 flex gap-3">
+
+          <button
+            onClick={startPause}
+            className="flex-1 rounded-full bg-[#FF6B6B] py-2 text-lg font-semibold"
+          >
+            {timer.isRunning ? "Pause" : "Start"}
+          </button>
+
+          <button
+            onClick={reset}
+            className="rounded-full bg-[#374151] px-4 py-2 text-xl"
+            title="Reset"
+          >
+            ↺
+          </button>
+
+        </div>
 
     </div>
   );

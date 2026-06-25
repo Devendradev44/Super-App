@@ -27,7 +27,7 @@ export default function NewsWidget() {
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % articles.length);
-    }, 5000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [articles]);
