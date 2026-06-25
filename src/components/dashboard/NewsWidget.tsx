@@ -10,14 +10,23 @@ export default function NewsWidget() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
+    // async function loadNews() {
+    //   try {
+    //     const data = await getTopNews();
+    //     setArticles(data);
+    //   } catch (error) {
+    //     console.error("News Error:", error);
+    //   }
+    // }
     async function loadNews() {
-      try {
-        const data = await getTopNews();
-        setArticles(data);
-      } catch (error) {
-        console.error("News Error:", error);
-      }
-    }
+  try {
+    const data = await getTopNews();
+    setArticles(data);
+  } catch (error: any) {
+    console.error("News Error:", error);
+    console.log(error.response?.data);
+  }
+}
 
     loadNews();
   }, []);
@@ -48,7 +57,7 @@ export default function NewsWidget() {
     <div className="relative h-[240px]">
 
       <Image
-        src={article.urlToImage}
+        src={article.image}
         alt={article.title}
         fill
         className="object-cover"
