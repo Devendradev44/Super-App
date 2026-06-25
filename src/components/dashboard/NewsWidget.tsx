@@ -22,9 +22,9 @@ export default function NewsWidget() {
   try {
     const data = await getTopNews();
     setArticles(data);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("News Error:", error);
-    console.log(error.response?.data);
+    // console.log(error.response?.data);
   }
 }
 
